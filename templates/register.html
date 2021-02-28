@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="title">Register form</h3>
+<div class="holder card">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+
+        {{ form.login.label(class="form-label label") }}
+        {{ form.login(class="form-control") }}
+
+        {{ form.password.label(class="form-label label") }}
+        {{ form.password(class="form-control") }}
+
+        {{ form.repeat_password.label(class="form-label label") }}
+        {{ form.repeat_password(class="form-control") }}
+
+        {{ form.surname.label(class="form-label label") }}
+        {{ form.surname(class="form-control") }}
+
+        {{ form.name.label(class="form-label label") }}
+        {{ form.name(class="form-control") }}
+
+        {{ form.age.label(class="form-label label") }}
+        {{ form.age(class="form-control") }}
+
+        {{ form.position.label(class="form-label label") }}
+        {{ form.position(class="form-control") }}
+
+        {{ form.speciality.label(class="form-label label") }}
+        {{ form.speciality(class="form-control") }}
+
+        {{ form.address.label(class="form-label label") }}
+        {{ form.address(class="form-control") }}
+
+        {{ form.submit(class="btn btn-primary submit") }}
+    </form>
+</div>
+{% endblock %}

@@ -56,3 +56,19 @@ td:last-child {
     background-color: #ffeeff;
     width: 10%;
 }
+
+.holder {
+    width: 50%;
+    margin: 20px auto;
+    padding: 10px;
+    padding-top: 0;
+}
+
+.label {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.submit {
+    margin-top: 15px;
+}
