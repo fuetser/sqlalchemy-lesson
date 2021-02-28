@@ -1,0 +1,58 @@
+h4 {
+    color: grey;
+}
+
+
+.title {
+    width: 20%;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.action {
+    color: black;
+    margin-top: 15px;
+}
+
+table {
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+th {
+    background-color: #d0d0d0;
+    font-size: 18px;
+    font-weight: normal;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+th:first-child {
+    text-align-last: left;
+    padding-left: 10px;
+}
+
+td{
+    background-color: #eeeeff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+td:first-child {
+    text-align-last: left;
+    padding-left: 10px;
+}
+
+td:last-child {
+    text-transform: none;
+}
+
+.is-finished {
+    background-color: #ffeeff;
+    width: 10%;
+}
