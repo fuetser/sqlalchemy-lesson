@@ -27,5 +27,5 @@ class Jobs(SqlAlchemyBase):
     work_size = Column(Integer)
     collaborators = Column(String)
     start_date = Column(DateTime)
-    end_date = Column(DateTime)
+    end_date = Column(DateTime, nullable=True)
     is_finished = Column(Boolean)
