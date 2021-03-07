@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="title">Adding a Job</h3>
+<div class="holder card">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.job.label(class="form-label label") }}
+        {{ form.job(class="form-control") }}
+        {{ form.team_leader.label(class="form-label label") }}
+        {{ form.team_leader(class="form-control") }}
+        {{ form.work_size.label(class="form-label label") }}
+        {{ form.work_size(class="form-control") }}
+        {{ form.collaborators.label(class="form-label label") }}
+        {{ form.collaborators(class="form-control") }}
+        <div class="form-control-check">
+            {{ form.is_finished(class="form-control-check") }}
+            {{ form.is_finished.label(class="form-label label") }}
+        </div>
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+</div>
+{% endblock %}

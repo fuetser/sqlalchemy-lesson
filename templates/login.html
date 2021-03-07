@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="title">Authorization</h3>
+<div class="holder card">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.login.label(class="form-label label") }}
+        {{ form.login(class="form-control") }}
+        {{ form.password.label(class="form-label label") }}
+        {{ form.password(class="form-control") }}
+        <div class="form-control-check">
+            {{ form.remember(class="form-control-check") }}
+            {{ form.remember.label(class="form-label label") }}
+        </div>
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+</div>
+{% endblock %}

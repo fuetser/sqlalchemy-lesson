@@ -16,8 +16,18 @@
   <body>
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">Миссия Колонизация Марса</span>
-        <span class="nav-item h4 mr-10 mb-0">Mars One</span>
+        <span><a href="/" class="navbar-brand mb-0 h1">Миссия Колонизация Марса</a></span>
+        <div class="navbar-inner">
+          {% if current_user.is_authenticated %}
+            <a href="{{ url_for('logout') }}" class="navbar-name">{{ current_user.name }} {{ current_user.surname }}</a>
+          {% else %}
+          <div class="buttons-wrapper">
+            <a href="{{ url_for('register') }}" class="btn btn-primary">Register</a>
+            <a href="{{ url_for('login') }}" class="btn btn-success">Login</a>
+          </div>
+          {% endif %}
+          <span class="nav-item h4 mr-10 mb-0">Mars One</span>
+        </div>
       </div>
     </nav>
 

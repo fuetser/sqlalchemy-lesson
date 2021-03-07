@@ -1,13 +1,14 @@
+body {
+    padding-bottom: 20px;
+}
+
 h4 {
     color: grey;
 }
 
-
 .title {
     width: 20%;
-    margin-bottom: 0;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
 }
 
 .action {
@@ -19,7 +20,6 @@ table {
     width: 100%;
     margin-top: 15px;
 }
-
 
 th {
     background-color: #d0d0d0;
@@ -52,8 +52,13 @@ td:last-child {
     text-transform: none;
 }
 
-.is-finished {
+.is-not-finished {
     background-color: #ffeeff;
+    width: 10%;
+}
+
+.is-finished {
+    background-color: #eeffee;
     width: 10%;
 }
 
@@ -67,8 +72,29 @@ td:last-child {
 .label {
     margin-top: 10px;
     margin-bottom: 10px;
+    font-size: 18px;
 }
 
 .submit {
     margin-top: 15px;
+}
+
+.navbar-inner {
+    display: flex;
+    width: 20%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-name {
+    text-decoration: none;
+    margin: 0;
+    color: #808080;
+    font-size: 18px;
+    transition: all .1s;
+}
+
+.navbar-name:hover {
+    color: #000;
+    transition: all .3s;
 }
