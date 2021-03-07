@@ -3,7 +3,7 @@
 {% block content %}
 <h3 class="title">Works log</h3>
 {% for job, user in records %}
-<h4 class="action">Action #{{ loop.index }}</h4>
+<a href="/job/{{ loop.index }}" class="link"><h4 class="action">Action #{{ loop.index }}</h4></a>
 <table>
     <tr>
         <th>Title of activity</th>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, abort, request
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from __all_models import *
@@ -77,6 +77,39 @@ def add_job():
         session.commit()
         return redirect("/")
     return render_template("add_job.html", title="Добавить работу", form=form)
+
+
+@app.route("/job/<int:job_id>", methods=['GET', 'POST'])
+@login_required
+def edit_job(job_id):
+    print(current_user.id)
+    form = JobForm()
+    if request.method == "GET":
+        job = session.query(Jobs).filter(
+            Jobs.id == job_id,
+            (Jobs.team_leader == current_user.id) | (current_user.id == 1)
+        ).first()
+        if job:
+            form.job.data = job.job
+            form.team_leader.data = job.team_leader
+            form.work_size.data = job.work_size
+            form.collaborators.data = job.collaborators
+            form.is_finished.data = job.is_finished
+        else:
+            abort(404)
+    if form.validate_on_submit():
+        job = session.query(Jobs).filter(Jobs.id == job_id).first()
+        if job:
+            job.job = form.job.data
+            job.team_leader = form.team_leader.data
+            job.work_size = form.work_size.data
+            job.collaborators = form.collaborators.data
+            job.is_finished = form.is_finished.data
+            session.commit()
+            return redirect("/")
+        else:
+            abort(404)
+    return render_template("add_job.html", title="Изменить работу", form=form)
 
 
 if __name__ == '__main__':
