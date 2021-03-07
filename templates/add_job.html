@@ -16,8 +16,11 @@
         <div class="form-control-check">
             {{ form.is_finished(class="form-control-check") }}
             {{ form.is_finished.label(class="form-label label") }}
-        </div>
+        </div> 
         {{ form.submit(class="btn btn-primary") }}
+        {% if delete %}
+            <a href="/deljob/{{ job_id }}" class="btn btn-danger">Delete</a>
+        {% endif %}
     </form>
 </div>
 {% endblock %}
