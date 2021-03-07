@@ -102,3 +102,7 @@ td:last-child {
 .link {
     text-decoration: none;
 }
+
+.footer-wrapper {
+    margin-top: 10px;
+}

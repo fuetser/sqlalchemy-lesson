@@ -2,27 +2,38 @@
 
 {% block content %}
 <h3 class="title">Works log</h3>
+{% if current_user.is_authenticated %}
+    <a href="{{ url_for('add_job') }}" class="btn btn-secondary">Add Job</a>
+{% endif %}
 {% for job, user in records %}
-<a href="/job/{{ loop.index }}" class="link"><h4 class="action">Action #{{ loop.index }}</h4></a>
-<table>
-    <tr>
-        <th>Title of activity</th>
-        <th>Team leader</th>
-        <th>Duration</th>
-        <th>List of collaborators</th>
-        <th>is finished</th>
-    </tr>
+<a href="/job/{{ job.id }}" class="link"><h4 class="action">Action #{{ loop.index }}</h4></a>
+<div class="table-wrapper">
+    <table>
         <tr>
-            <td style="width: 40%;">{{ job.job }}</td>
-            <td>{{ user.surname }} {{ user.name }}</td>
-            <td>{{ job.work_size }} hours</td>
-            <td>{{ job.collaborators }}</td>
-            {% if job.is_finished %}
-                <td class="is-finished">Finished</td>
-            {% else %}
-                <td class="is-not-finished">Not Finished</td>
-            {% endif %}
+            <th>Title of activity</th>
+            <th>Team leader</th>
+            <th>Duration</th>
+            <th>List of collaborators</th>
+            <th>is finished</th>
         </tr>
-</table>
+            <tr>
+                <td style="width: 40%;">{{ job.job }}</td>
+                <td>{{ user.surname }} {{ user.name }}</td>
+                <td>{{ job.work_size }} hours</td>
+                <td>{{ job.collaborators }}</td>
+                {% if job.is_finished %}
+                    <td class="is-finished">Finished</td>
+                {% else %}
+                    <td class="is-not-finished">Not Finished</td>
+                {% endif %}
+            </tr>
+    </table>
+    {% if current_user.id == 1 or current_user.id == job.team_leader %}
+    <div class="footer-wrapper">
+        <a href="/job/{{ job.id }}" class="btn btn-warning">Edit</a>
+        <a href="/deljob/{{ job.id }}" class="btn btn-danger">Delete</a>
+    </div>
+    {% endif %}
+</div>
 {% endfor %}
 {% endblock %}
