@@ -5,6 +5,7 @@
 {% if current_user.is_authenticated %}
     <a href="{{ url_for('add_job') }}" class="btn btn-secondary">Add Job</a>
 {% endif %}
+<a href="{{ url_for('departments') }}" class="btn btn-secondary">Go to Departments</a>
 {% for job, user in records %}
 <a href="/job/{{ job.id }}" class="link"><h4 class="action">Action #{{ loop.index }}</h4></a>
 <div class="table-wrapper">

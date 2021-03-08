@@ -30,3 +30,13 @@ class Jobs(SqlAlchemyBase):
     start_date = Column(DateTime)
     end_date = Column(DateTime, nullable=True)
     is_finished = Column(Boolean)
+
+
+class Department(SqlAlchemyBase):
+    __tablename__ = "departments"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    title = Column(String)
+    chief = Column(Integer, ForeignKey("users.id"))
+    members = Column(String)
+    email = Column(String)

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="title">Add a Department</h3>
+<div class="holder card">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.title.label(class="form-label label") }}
+        {{ form.title(class="form-control") }}
+        {{ form.chief.label(class="form-label label") }}
+        {{ form.chief(class="form-control") }}
+        {{ form.members.label(class="form-label label") }}
+        {{ form.members(class="form-control") }}
+        {{ form.email.label(class="form-label label") }}
+        {{ form.email(class="form-control") }}
+        {{ form.submit(class="btn btn-primary submit") }}
+        {% if delete %}
+            <a href="/deldepartment/{{ dep_id }}" class="btn btn-danger submit">Delete</a>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}
