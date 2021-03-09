@@ -1,7 +1,15 @@
 from datetime import datetime
 from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey
+from sqlalchemy import Table, orm
 from db_session import SqlAlchemyBase
+
+
+jobs_to_categories = Table(
+    'association', SqlAlchemyBase.metadata,
+    Column('jobs', Integer, ForeignKey('jobs.id')),
+    Column('category', Integer, ForeignKey('category.id'))
+)
 
 
 class User(SqlAlchemyBase, UserMixin):
@@ -30,6 +38,8 @@ class Jobs(SqlAlchemyBase):
     start_date = Column(DateTime)
     end_date = Column(DateTime, nullable=True)
     is_finished = Column(Boolean)
+    categories = orm.relation(
+        "Category", secondary="association", backref="jobs")
 
 
 class Department(SqlAlchemyBase):
@@ -40,3 +50,10 @@ class Department(SqlAlchemyBase):
     chief = Column(Integer, ForeignKey("users.id"))
     members = Column(String)
     email = Column(String)
+
+
+class Category(SqlAlchemyBase):
+    __tablename__ = 'category'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    title = Column(String)
