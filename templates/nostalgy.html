@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="main">
+    <div class="centred">
+        <h3>Nostalgy</h3> 
+        <h4 style="color: black;">{{ user.name }} {{ user.surname }}</h4>
+        <h5>Hometown {{ user.city_from }}</h5>
+    </div>
+    <img src="{{ image_url }}" alt="Hometown" class="hometown__image">
+</main>
+{% endblock %}

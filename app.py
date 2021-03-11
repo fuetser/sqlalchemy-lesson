@@ -1,13 +1,41 @@
+import urllib.parse
+import xml.etree.ElementTree
 from flask import Flask, render_template, redirect, abort, request, url_for
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
+import requests
 from werkzeug.security import generate_password_hash, check_password_hash
 from __all_models import *
+from api import api
 from db_session import global_init, create_session
 from forms import *
 
 
+def get_coords(toponym: str):
+    url = "http://geocode-maps.yandex.ru/1.x/?"
+    params = {
+        "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
+        "format": "xml",
+        "geocode": toponym,
+    }
+    responce = requests.get(url, params=params)
+    tree = xml.etree.ElementTree.XML(responce.text)
+    return tree.findtext(".//{*}pos").replace(" ", ",")
+
+
+def get_image_url(coords: str):
+    url = "https://static-maps.yandex.ru/1.x/?"
+    params = {
+        "ll": coords,
+        "l": "sat",
+        "z": "13"
+    }
+    data = urllib.parse.urlencode(params)
+    return f"{url}{data}"
+
+
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "strong_password"
+app.register_blueprint(api)
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 global_init("db.db")
@@ -190,6 +218,17 @@ def delete_department(dep_id):
     else:
         abort(404)
     return redirect(url_for("departments"))
+
+
+@app.route("/users_show/<int:user_id>")
+def show_users_hometown(user_id):
+    resp = requests.get(f"http://localhost:5000/api/users/{user_id}")
+    if not resp.ok:
+        abort(404)
+    user = resp.json().get("users")[0]
+    url = get_image_url(get_coords(user["city_from"]))
+    return render_template(
+        "nostalgy.html", title="Hometown", image_url=url, user=user)
 
 
 if __name__ == '__main__':

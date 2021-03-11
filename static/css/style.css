@@ -106,3 +106,17 @@ td:last-child {
 .footer-wrapper {
     margin-top: 10px;
 }
+
+
+.centred {
+    width: 20%;
+    margin: 0 auto 25px;
+    text-align: center;
+}
+
+.hometown__image {
+    margin: 0 auto;
+    width: 600px;
+    height: 450px;
+    display: block;
+}

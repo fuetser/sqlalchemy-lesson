@@ -1,5 +1,6 @@
 from datetime import datetime
 from flask_login import UserMixin
+from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey
 from sqlalchemy import Table, orm
 from db_session import SqlAlchemyBase
@@ -12,7 +13,7 @@ jobs_to_categories = Table(
 )
 
 
-class User(SqlAlchemyBase, UserMixin):
+class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -25,9 +26,10 @@ class User(SqlAlchemyBase, UserMixin):
     email = Column(String, unique=True)
     hashed_password = Column(String, default="password")
     modified_date = Column(DateTime, default=datetime.now)
+    city_from = Column(String, default="Moscow")
 
 
-class Jobs(SqlAlchemyBase):
+class Jobs(SqlAlchemyBase, SerializerMixin):
     __tablename__ = "jobs"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -42,7 +44,7 @@ class Jobs(SqlAlchemyBase):
         "Category", secondary="association", backref="jobs")
 
 
-class Department(SqlAlchemyBase):
+class Department(SqlAlchemyBase, SerializerMixin):
     __tablename__ = "departments"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -52,7 +54,7 @@ class Department(SqlAlchemyBase):
     email = Column(String)
 
 
-class Category(SqlAlchemyBase):
+class Category(SqlAlchemyBase, SerializerMixin):
     __tablename__ = 'category'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
